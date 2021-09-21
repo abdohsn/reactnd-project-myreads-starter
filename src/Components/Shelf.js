@@ -3,7 +3,7 @@ import SingleBook from './SingleBook';
 
 export class Shelf extends Component {
   render() {
-    const { shelfBooks, shelfName } = this.props;
+    const { shelfBooks, shelfName, changBookState } = this.props;
 
     console.log('shlefbookss: ', shelfBooks);
 
@@ -15,7 +15,7 @@ export class Shelf extends Component {
             <ol className="books-grid">
               <li>
                 {shelfBooks.map((book) => (
-                  <SingleBook key={book.id} book={book} />
+                  <SingleBook key={book.id} book={book} changBookState={changBookState} />
                 ))}
               </li>
             </ol>

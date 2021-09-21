@@ -4,7 +4,7 @@ import BooksApp from '../App';
 
 export class SingleBook extends Component {
   render() {
-    const { book } = this.props;
+    const { book, changBookState } = this.props;        
 
     return (
       <div>
@@ -19,14 +19,15 @@ export class SingleBook extends Component {
               }}
             />
             <div className="book-shelf-changer">
-              <select>
+              <select onChange={(event) => changBookState(book.id, event.target.value)}>
                 <option value="move" disabled>
                   Move to...
                 </option>
+                <option value="none">None</option>
                 <option value="currentlyReading">Currently Reading</option>
                 <option value="wantToRead">Want to Read</option>
                 <option value="read">Read</option>
-                <option value="none">None</option>
+                
               </select>
             </div>
           </div>
