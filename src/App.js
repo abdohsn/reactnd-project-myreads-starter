@@ -47,38 +47,47 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
-        <Route exact path='/' render={()=>(
-          <>
-          <div>
-          <div className="list-books">
-            <div className="list-books-title">
-              <h1>MyReads</h1>
-            </div>
-            <div className="list-books-content">
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <>
               <div>
-                {this.state.shelfs.map((shelf) => (
-                  <Shelf
-                    key={shelf.id}
-                    changBookState={this.changBookState}
-                    shelfName={shelf.bookStatus}
-                    shelfBooks={this.state.books.filter(
-                      (book) => book.shelf == shelf.bookStatus
-                    )}
-                  />
-                ))}
+                <div className="list-books">
+                  <div className="list-books-title">
+                    <h1>MyReads</h1>
+                  </div>
+                  <div className="list-books-content">
+                    <div>
+                      {this.state.shelfs.map((shelf) => (
+                        <Shelf
+                          key={shelf.id}
+                          changBookState={this.changBookState}
+                          shelfName={shelf.bookStatus}
+                          shelfBooks={this.state.books.filter(
+                            (book) => book.shelf === shelf.bookStatus
+                          )}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
-        <div className="open-search">
-          <Link to="/search">Add a book</Link>
-        </div>
-          </>
-        )} />
-        <Route path='/search' render={()=>(
-          <Search />
-        )} />
-        
+              <div className="open-search">
+                <Link to="/search">Add a book</Link>
+              </div>
+            </>
+          )}
+        />
+        <Route
+          path="/search"
+          render={() => (
+            <Search
+              books={this.state.books}
+              changBookState={this.changBookState}
+            />
+          )}
+        />
       </div>
     );
   }

@@ -1,6 +1,4 @@
-import { bool } from 'prop-types';
 import React, { Component } from 'react';
-import BooksApp from '../App';
 
 export class SingleBook extends Component {
   render() {
