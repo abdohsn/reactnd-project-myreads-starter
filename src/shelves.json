@@ -2,19 +2,23 @@
   "shelves": [
     {
       "shelfName": "none",
-      "shelfDisplayName": "None"
+      "shelfDisplayName": "None",
+      "id": "1"
     },
     {
       "shelfName": "wantToRead",
-      "shelfDisplayName": "Want to Read"
+      "shelfDisplayName": "Want to Read",
+      "id": "2"
     },
     {
       "shelfName": "currentlyReading",
-      "shelfDisplayName": "Currently Reading"
+      "shelfDisplayName": "Currently Reading",
+      "id": "3"
     },
     {
       "shelfName": "read",
-      "shelfDisplayName": "Read"
+      "shelfDisplayName": "Read",
+      "id": "4"
     }
   ]
 }

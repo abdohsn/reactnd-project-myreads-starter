@@ -4,6 +4,7 @@ import './App.css';
 import Shelf from './Components/Shelf';
 import { Link, Route } from 'react-router-dom';
 import Search from './Components/Search';
+import { shelves } from './shelves.json';
 
 class BooksApp extends React.Component {
   state = {
@@ -13,11 +14,6 @@ class BooksApp extends React.Component {
      * users can use the browser's back and forward buttons to navigate between
      * pages, as well as provide a good URL they can bookmark and share.
      */
-    shelfs: [
-      { id: 1, bookStatus: 'wantToRead' },
-      { id: 2, bookStatus: 'currentlyReading' },
-      { id: 3, bookStatus: 'read' },
-    ],
     showSearchPage: false,
     books: [],
     query: '',
@@ -63,7 +59,6 @@ class BooksApp extends React.Component {
     });
   }
 
-
   updateQuery = (query) => {
     this.setState(
       () => ({
@@ -80,12 +75,10 @@ class BooksApp extends React.Component {
           } else {
             this.search(this.state.query);
           }
-        }, 1000)
+        }, 1000);
       }
     );
   };
-
-
 
   render() {
     return (
@@ -102,16 +95,18 @@ class BooksApp extends React.Component {
                   </div>
                   <div className="list-books-content">
                     <div>
-                      {this.state.shelfs.map((shelf) => (
-                        <Shelf
-                          key={shelf.id}
-                          changBookState={this.changBookState}
-                          shelfName={shelf.bookStatus}
-                          shelfBooks={this.state.books.filter(
-                            (book) => book.shelf === shelf.bookStatus
-                          )}
-                        />
-                      ))}
+                      {shelves
+                        .filter((shelf) => shelf.shelfName !== 'none')
+                        .map((shelf) => (
+                          <Shelf
+                            key={shelf.id}
+                            changBookState={this.changBookState}
+                            shelfDisplayName={shelf.shelfDisplayName}
+                            shelfBooks={this.state.books.filter(
+                              (book) => book.shelf === shelf.shelfName
+                            )}
+                          />
+                        ))}
                     </div>
                   </div>
                 </div>

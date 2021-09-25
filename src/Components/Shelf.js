@@ -3,14 +3,14 @@ import SingleBook from './SingleBook';
 
 export class Shelf extends Component {
   render() {
-    const { shelfBooks, shelfName, changBookState } = this.props;
+    const { shelfBooks, shelfDisplayName, changBookState } = this.props;
 
     console.log('shlefbookss: ', shelfBooks);
 
     return (
       <div>
         <div className="bookshelf">
-          <h2 className="bookshelf-title">{shelfName}</h2>
+          <h2 className="bookshelf-title">{shelfDisplayName}</h2>
           <div className="bookshelf-books">
             <ol className="books-grid">
               <li>
