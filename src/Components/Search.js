@@ -1,28 +1,69 @@
 import React, { Component } from 'react';
 import SingleBook from './SingleBook';
 import { Link } from 'react-router-dom';
+import * as BooksAPI from '../BooksAPI';
 
 export class Search extends Component {
-  state = {
-    query: '',
-  };
+  // state = {
+  //   query: '',
+  //   books: [],
+  //   searching: false,
+  // };
 
-  updateQuery = (query) => {
-    this.setState(() => ({
-      query: query.trim(),
-    }));
-  };
+  // componentDidMount() {
+  //   BooksAPI.getAll().then((books) => {
+  //     console.log('books returned: ', books);
+  //     this.setState(() => ({
+  //       books,
+  //     }));
+  //   });
+  // }
+
+  // search(query) {
+  //   BooksAPI.search(query).then((books) => {
+  //     if (books.error === 'empty query') {
+  //       this.setState({
+  //         books: [],
+  //         searching: false,
+  //       });
+  //     } else {
+  //       this.setState(() => ({
+  //         books,
+  //         searching: false,
+  //       }));
+  //     }
+  //   });
+  // }
+
+  // updateQuery = (query) => {
+  //   this.setState(
+  //     () => ({
+  //       query: query.trim(),
+  //       searching: true,
+  //     }),
+  //     () => {
+  //       setTimeout(() => {
+  //         if (this.state.query === '') {
+  //           this.setState({
+  //             books: [],
+  //             searching: false,
+  //           });
+  //         } else {
+  //           this.search(this.state.query);
+  //         }
+  //       }, 500)
+  //     }
+  //   );
+  // };
 
   render() {
-    const { query } = this.state;
-    const { books, changBookState } = this.props;
+    // const { query, books } = this.state;
+    const { changBookState, books, query, updateQuery, searching } = this.props;
 
-    const showingBooks =
-      query === ''
-        ? []
-        : books.filter((book) =>
-            book.title.toLowerCase().includes(query.toLowerCase())
-          );
+    // const showingBooks =
+    //   query === ''
+    //     ? []
+    //     : books
 
     return (
       <div>
@@ -33,31 +74,28 @@ export class Search extends Component {
             </Link>
             <div className="search-books-input-wrapper">
               <input
-                value={query}
-                onChange={(event) => this.updateQuery(event.target.value)}
+                onChange={(event) => updateQuery(event.target.value)}
                 type="text"
                 placeholder="Search by title or author"
               />
             </div>
           </div>
-          
+
           <div className="search-books-results">
-          {showingBooks.length !== 0 && (
-            <div>
-              <span>
-                showing {showingBooks.length} results for query {query}
-              </span>
-            </div>
-          )}
-          {(showingBooks.length === 0 && query.length !== 0) && (
-            <div>
-              <span>
-                There is no matching results for {query}
-              </span>
-            </div>
-          )}
+            {books.length !== 0 && (
+              <div>
+                <span>
+                  showing {books.length} results for query {query}
+                </span>
+              </div>
+            )}
+            {books.length === 0 && query.length !== 0 && searching === false && (
+              <div>
+                <span>There is no matching results for {query}</span>
+              </div>
+            )}
             <ol className="books-grid">
-              {showingBooks.map((book) => (
+              {books.map((book) => (
                 <SingleBook
                   key={book.id}
                   book={book}

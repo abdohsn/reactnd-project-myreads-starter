@@ -1,0 +1,20 @@
+{
+  "shelves": [
+    {
+      "shelfName": "none",
+      "shelfDisplayName": "None"
+    },
+    {
+      "shelfName": "wantToRead",
+      "shelfDisplayName": "Want to Read"
+    },
+    {
+      "shelfName": "currentlyReading",
+      "shelfDisplayName": "Currently Reading"
+    },
+    {
+      "shelfName": "read",
+      "shelfDisplayName": "Read"
+    }
+  ]
+}

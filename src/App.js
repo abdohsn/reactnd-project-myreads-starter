@@ -20,6 +20,9 @@ class BooksApp extends React.Component {
     ],
     showSearchPage: false,
     books: [],
+    query: '',
+    searchedBooks: [],
+    searching: false,
   };
 
   componentDidMount() {
@@ -43,6 +46,46 @@ class BooksApp extends React.Component {
       }),
     }));
   };
+
+  search(query) {
+    BooksAPI.search(query).then((searchedBooks) => {
+      if (searchedBooks.error === 'empty query') {
+        this.setState({
+          searchedBooks: [],
+          searching: false,
+        });
+      } else {
+        this.setState(() => ({
+          searchedBooks,
+          searching: false,
+        }));
+      }
+    });
+  }
+
+
+  updateQuery = (query) => {
+    this.setState(
+      () => ({
+        query: query.trim(),
+        searching: true,
+      }),
+      () => {
+        setTimeout(() => {
+          if (this.state.query === '') {
+            this.setState({
+              searchedBooks: [],
+              searching: false,
+            });
+          } else {
+            this.search(this.state.query);
+          }
+        }, 1000)
+      }
+    );
+  };
+
+
 
   render() {
     return (
@@ -83,8 +126,11 @@ class BooksApp extends React.Component {
           path="/search"
           render={() => (
             <Search
-              books={this.state.books}
+              books={this.state.searchedBooks}
               changBookState={this.changBookState}
+              query={this.state.query}
+              updateQuery={this.updateQuery}
+              searching={this.state.searching}
             />
           )}
         />
