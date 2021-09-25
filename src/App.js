@@ -43,6 +43,20 @@ class BooksApp extends React.Component {
     }));
   };
 
+  changSearchedBookState = (id, NewState) => {
+    this.setState((currentState) => ({
+      searchedBooks: currentState.searchedBooks.map((book) => {
+        if (book.id === id) {
+          book.shelf = NewState;
+          BooksAPI.update(book, NewState);
+          this.state.books.concat(book);
+          return book;
+        }
+        return book;
+      }),
+    }));
+  };
+
   search(query) {
     BooksAPI.search(query).then((searchedBooks) => {
       if (searchedBooks.error === 'empty query') {
@@ -122,7 +136,7 @@ class BooksApp extends React.Component {
           render={() => (
             <Search
               books={this.state.searchedBooks}
-              changBookState={this.changBookState}
+              changBookState={this.changSearchedBookState}
               query={this.state.query}
               updateQuery={this.updateQuery}
               searching={this.state.searching}
