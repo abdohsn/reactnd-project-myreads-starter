@@ -15,9 +15,9 @@ export class SingleBook extends Component {
               style={{
                 width: 128,
                 height: 193,
-                backgroundImage: book.imageLinks.thumbnail
-                  ? `url("${book.imageLinks.thumbnail}")`
-                  : undefined,
+                backgroundImage: book.imageLinks?.thumbnail ?
+                `url("${book.imageLinks.thumbnail}")`
+                  : undefined
               }}
             />
             <div className="book-shelf-changer">
@@ -25,6 +25,7 @@ export class SingleBook extends Component {
                 onChange={(event) =>
                   changBookState(book.id, event.target.value)
                 }
+                value={book.shelf}
               >
                 <option value="move" disabled>
                   Move to...

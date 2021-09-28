@@ -56,14 +56,24 @@ export class Search extends Component {
   //   );
   // };
 
+  componentDidMount(){
+    this.props.clearSearchPage()
+  }
+  
+
   render() {
     // const { query, books } = this.state;
-    const { changBookState, books, query, updateQuery, searching } = this.props;
+    const { changBookState, books, query, updateQuery, searching, mainBooks } = this.props;
 
     // const showingBooks =
     //   query === ''
     //     ? []
     //     : books
+
+    const validatedBooks = books.map((searchedBook) => {
+      const myBook = this.props.mainBooks.filter((myBook) => (myBook.id === searchedBook.id))[0]
+      searchedBook.shelf = myBook ? myBook.shelf : "none"
+      return searchedBook})
 
     return (
       <div>
@@ -95,7 +105,7 @@ export class Search extends Component {
               </div>
             )}
             <ol className="books-grid">
-              {books.map((book) => (
+              {validatedBooks.map((book) => (
                 <SingleBook
                   key={book.id}
                   book={book}

@@ -57,6 +57,11 @@ class BooksApp extends React.Component {
     }));
   };
 
+
+  clearSearchPage(){
+    
+  }
+
   search(query) {
     BooksAPI.search(query).then((searchedBooks) => {
       if (searchedBooks.error === 'empty query') {
@@ -140,6 +145,8 @@ class BooksApp extends React.Component {
               query={this.state.query}
               updateQuery={this.updateQuery}
               searching={this.state.searching}
+              mainBooks={this.state.books}
+              clearSearchPage={this.clearSearchPage}
             />
           )}
         />
